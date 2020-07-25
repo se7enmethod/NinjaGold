@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ninja Gold</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <h3>Your Gold: {{ request.session.counter}}</h3>
+
+    <form action="/process" method="POST">
+      {% csrf_token %}
+      <div>
+        <h2>Farm</h2>
+        <p>(earns 10-20 golds)</p>
+        <button name="farm" type="submit">Find Gold!</button>
+        <input type="hidden" />
+      </div>
+      <div>
+        <form action="/process" method="POST">
+          {% csrf_token %}
+          <h2>Cave</h2>
+          <p>(earns 5-10 golds)</p>
+          <button type="submit" name="cave">Find Gold!</button>
+          <input type="hidden" name="cave" />
+        </form>
+      </div>
+      <div>
+        <h2>House</h2>
+        <p>(earns 2-5 golds)</p>
+        <button name="house" type="submit">Find Gold!</button>
+        <input type="hidden" />
+      </div>
+      <div>
+        <h2>Casino</h2>
+        <p>(earns 0-50 golds)</p>
+        <button name="casino" type="submit">Find Gold!</button>
+        <input type="hidden" />
+      </div>
+    </form>
+    <p>Activities</p>
+    <p>
+      {% for message in messages reversed %} {{message}} <br />
+      {% endfor %}
+    </p>
+  </body>
+</html>
+counter
